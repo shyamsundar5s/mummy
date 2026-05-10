@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Mother's Day 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Dancing+Script:wght@600;700&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --rose:#c2185b;--blush:#f48fb1;--coral:#ff6f91;
+  --gold:#f5c518;--cream:#fff8f0;--violet:#9c27b0;
+  --magenta:#e91e8c;--saffron:#ff9800;--deep:#0a0008;
+}
+html,body{width:100%;min-height:100vh;overflow-x:hidden;background:var(--deep);font-family:'Cormorant Garamond',serif}
+
+/* CANVAS */
+#cvs{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* BG */
+.bg{position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 90% 55% at 15% 5%,  rgba(194,24,91,.38) 0%,transparent 60%),
+    radial-gradient(ellipse 70% 45% at 85% 95%, rgba(156,39,176,.32) 0%,transparent 60%),
+    radial-gradient(ellipse 55% 40% at 50% 50%, rgba(255,111,145,.10) 0%,transparent 70%),
+    linear-gradient(160deg,#1c000f 0%,#0d0008 45%,#060318 100%);
+  animation:bgp 9s ease-in-out infinite alternate}
+@keyframes bgp{0%{filter:brightness(1) hue-rotate(0deg)}100%{filter:brightness(1.18) hue-rotate(12deg)}}
+
+/* WRAP */
+.wrap{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding-bottom:60px}
+
+/* FLOWER ROW */
+.frow{width:100%;text-align:center;padding:14px 0 6px;font-size:1.45rem;letter-spacing:7px;
+  color:var(--blush);filter:drop-shadow(0 0 7px rgba(244,143,177,.55));animation:fi 1s ease both}
+
+/* HEADER */
+.hdr{width:100%;padding:28px 22px 20px;text-align:center;position:relative}
+.hdr::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(194,24,91,.22) 0%,transparent 100%)}
+.htag{display:inline-block;position:relative;font-family:'Dancing Script',cursive;font-size:.95rem;
+  color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;animation:fsd 1s ease .2s both}
+.htag::before,.htag::after{content:'✦';margin:0 9px;color:var(--coral)}
+.htitle{position:relative;font-family:'Playfair Display',serif;font-size:clamp(2.3rem,9vw,3.4rem);
+  font-weight:900;font-style:italic;line-height:1.05;
+  background:linear-gradient(135deg,#fff 0%,var(--blush) 35%,var(--gold) 65%,var(--coral) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 28px rgba(245,197,24,.4));animation:fsd 1s ease .4s both}
+.htitle span{display:block;font-size:clamp(2.7rem,10.5vw,4rem);font-style:normal}
+
+/* PHOTO */
+.psec{width:100%;padding:12px 26px 0;display:flex;justify-content:center;animation:fsu 1.2s ease .7s both}
+.pout{position:relative;width:100%;max-width:340px}
+.pout::before{content:'';position:absolute;inset:-3px;border-radius:28px;
+  background:linear-gradient(135deg,var(--gold),var(--magenta),var(--violet),var(--gold));
+  background-size:300% 300%;animation:gspin 3.8s linear infinite;z-index:0}
+@keyframes gspin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.pin{position:relative;z-index:1;border-radius:26px;overflow:hidden;
+  box-shadow:0 22px 65px rgba(194,24,91,.52),0 8px 20px rgba(0,0,0,.6),inset 0 0 0 2px rgba(255,255,255,.07)}
+.pin img{width:100%;display:block;border-radius:26px;object-fit:cover}
+
+/* fallback box */
+.fb{height:340px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(194,24,91,.38),rgba(156,39,176,.38));border-radius:26px;gap:14px}
+.fb-icon{font-size:4.5rem}
+.fb-txt{font-family:'Dancing Script',cursive;color:rgba(255,255,255,.75);font-size:1.3rem}
+
+/* sparkle overlay */
+.spark{position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:26px;overflow:hidden}
+.spark::before{content:'✨';position:absolute;font-size:1.4rem;top:10px;right:14px;animation:twk 2s ease-in-out infinite}
+.spark::after{content:'✨';position:absolute;font-size:1rem;bottom:14px;left:14px;animation:twk 2s ease-in-out 1s infinite}
+@keyframes twk{0%,100%{opacity:1;transform:scale(1) rotate(0)}50%{opacity:.3;transform:scale(.7) rotate(20deg)}}
+
+/* corner hearts */
+.ch{position:absolute;font-size:1.8rem;animation:fht 3s ease-in-out infinite;filter:drop-shadow(0 0 7px rgba(255,111,145,.8));z-index:3}
+.ch-tl{top:-18px;left:-18px;animation-delay:0s}
+.ch-tr{top:-18px;right:-18px;animation-delay:.7s}
+.ch-bl{bottom:-18px;left:-18px;animation-delay:1.4s}
+.ch-br{bottom:-18px;right:-18px;animation-delay:2.1s}
+@keyframes fht{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-9px) scale(1.12)}}
+
+/* NAME */
+.ntag{margin-top:22px;font-family:'Dancing Script',cursive;font-size:1.5rem;
+  color:var(--gold);text-align:center;animation:fsu 1s ease 1.05s both;letter-spacing:1px}
+
+/* DIVIDER */
+.div{display:flex;align-items:center;gap:12px;margin:28px 28px 0;animation:fi 1s ease 1.2s both}
+.dl{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.7}
+.dc{font-size:1.3rem;color:var(--gold);animation:rslow 7s linear infinite}
+@keyframes rslow{to{transform:rotate(360deg)}}
+
+/* MESSAGE */
+.msg{margin:24px 20px 0;background:rgba(255,255,255,.04);border:1px solid rgba(245,200,66,.2);
+  border-radius:24px;padding:28px 22px;position:relative;overflow:hidden;
+  backdrop-filter:blur(14px);animation:fsu 1.2s ease 1.4s both;
+  box-shadow:0 8px 40px rgba(194,24,91,.2),inset 0 0 60px rgba(245,200,66,.03)}
+.msg::before{content:'"';position:absolute;top:-10px;left:14px;font-family:'Playfair Display',serif;
+  font-size:8rem;color:rgba(245,200,66,.07);line-height:1;pointer-events:none}
+.mtxt{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-style:italic;
+  line-height:1.88;color:rgba(255,255,255,.88);text-align:center;letter-spacing:.3px}
+.mtxt strong{font-style:normal;font-weight:600;color:var(--blush)}
+.hl{background:linear-gradient(135deg,var(--gold),var(--coral));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-style:normal;font-weight:700}
+
+/* FROM */
+.from{margin-top:34px;text-align:center;animation:fsu 1.2s ease 1.75s both}
+.flbl{font-family:'Cormorant Garamond',serif;font-size:.88rem;letter-spacing:4px;
+  text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:12px}
+.fnames{font-family:'Dancing Script',cursive;font-size:2.7rem;font-weight:700;
+  background:linear-gradient(135deg,var(--blush),var(--gold),var(--coral));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 22px rgba(244,143,177,.5));line-height:1.25;animation:pglow 3.2s ease-in-out infinite}
+@keyframes pglow{0%,100%{filter:drop-shadow(0 0 22px rgba(244,143,177,.5))}50%{filter:drop-shadow(0 0 42px rgba(245,200,66,.7))}}
+.amp{display:inline-block;color:var(--gold);font-size:2.2rem;animation:sb 2.2s ease-in-out infinite;margin:0 4px}
+@keyframes sb{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.25) rotate(12deg)}}
+
+/* HEARTS */
+.hstrip{display:flex;justify-content:center;gap:14px;margin-top:32px;flex-wrap:wrap;padding:0 20px;animation:fi 1s ease 2s both}
+.he{font-size:1.6rem;animation:hbeat 1.6s ease-in-out infinite;filter:drop-shadow(0 0 8px rgba(233,30,140,.7))}
+.he:nth-child(1){animation-delay:0s}.he:nth-child(2){animation-delay:.2s}.he:nth-child(3){animation-delay:.4s}
+.he:nth-child(4){animation-delay:.6s}.he:nth-child(5){animation-delay:.8s}.he:nth-child(6){animation-delay:1s}.he:nth-child(7){animation-delay:1.2s}
+@keyframes hbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.27)}28%{transform:scale(1)}42%{transform:scale(1.15)}70%{transform:scale(1)}}
+
+/* SEAL */
+.seal{margin-top:38px;text-align:center;animation:fi 1.2s ease 2.3s both;padding:0 20px}
+.sring{display:inline-flex;align-items:center;justify-content:center;width:88px;height:88px;
+  border-radius:50%;border:2px solid rgba(245,200,66,.38);position:relative;margin-bottom:16px;animation:rslow 11s linear infinite}
+.sring::before{content:'';position:absolute;inset:6px;border-radius:50%;border:1px dashed rgba(245,200,66,.28)}
+.sicon{font-size:2.2rem;animation:rslow 11s linear infinite reverse}
+.stxt{font-family:'Dancing Script',cursive;font-size:1.05rem;color:rgba(255,255,255,.45);letter-spacing:1px}
+
+/* ANIMATIONS */
+@keyframes fsd{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+
+/* PETALS */
+.petal{position:fixed;bottom:-40px;pointer-events:none;z-index:1;opacity:0;animation:risep linear infinite}
+@keyframes risep{0%{transform:translateY(0) rotate(0deg) scale(.85);opacity:0}10%{opacity:.9}90%{opacity:.55}100%{transform:translateY(-115vh) rotate(760deg) scale(.35);opacity:0}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<canvas id="cvs"></canvas>
+
+<div class="wrap">
+  <div class="frow">🌸 🌺 🌹 🌸 🌺 🌹 🌸</div>
+
+  <div class="hdr">
+    <div class="htag">A Special Wish</div>
+    <h1 class="htitle">Happy<span>Mother's Day</span></h1>
+  </div>
+
+  <div class="psec">
+    <div class="pout" id="pout">
+      <span class="ch ch-tl">💖</span>
+      <span class="ch ch-tr">🌸</span>
+      <span class="ch ch-bl">🌹</span>
+      <span class="ch ch-br">💛</span>
+      <div class="pin" id="pin">
+        <!-- image injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <div class="ntag">✨ Our Wonderful Amma ✨</div>
+
+  <div class="div"><div class="dl"></div><span class="dc">❀</span><div class="dl"></div></div>
+
+  <div class="msg">
+    <p class="mtxt">
+      In every hug you give, we feel the
+      <span class="hl">whole universe</span>.<br><br>
+      You carry us in your arms and
+      <strong>in your heart</strong> — always with a smile that lights up our world.<br><br>
+      Your <span class="hl">love</span> is the most beautiful thing
+      we have ever known.<br><br>
+      Thank you for being our <strong>strength</strong>,
+      our <strong>warmth</strong>, and our <strong>home</strong>.<br><br>
+      We love you more than words can say —
+      <span class="hl">today, tomorrow, always.</span>
+    </p>
+  </div>
+
+  <div class="from">
+    <div class="flbl">With all our love, from</div>
+    <div class="fnames">Shyam <span class="amp">♡</span> Karthik</div>
+  </div>
+
+  <div class="hstrip">
+    <span class="he">💖</span><span class="he">🌸</span><span class="he">💛</span>
+    <span class="he">🌺</span><span class="he">💗</span><span class="he">🌹</span><span class="he">💝</span>
+  </div>
+
+  <div class="seal">
+    <div class="sring"><span class="sicon">👑</span></div>
+    <div class="stxt">Queen of Our Hearts · Forever 🌸</div>
+  </div>
+</div>
+
+<script>
+/* ── PARTICLES ── */
+const cvs=document.getElementById('cvs'),ctx=cvs.getContext('2d');
+let W,H,pts=[];
+function rsz(){W=cvs.width=window.innerWidth;H=cvs.height=window.innerHeight}
+rsz();window.addEventListener('resize',rsz);
+const COLS=['#f5c518','#f48fb1','#ff6f91','#c2185b','#ffffff','#ffd6e7'];
+class P{
+  constructor(){this.init(true)}
+  init(s){this.x=Math.random()*W;this.y=s?Math.random()*H:H+10;this.r=Math.random()*2.4+.5;
+    this.vx=(Math.random()-.5)*.4;this.vy=-(Math.random()*.85+.3);this.a=Math.random()*.55+.2;
+    this.clr=COLS[~~(Math.random()*COLS.length)];this.ts=Math.random()*.032+.01;this.to=Math.random()*Math.PI*2}
+  upd(t){this.x+=this.vx;this.y+=this.vy;this.a=.28+.3*Math.sin(t*this.ts+this.to);if(this.y<-10)this.init(false)}
+  draw(){ctx.save();ctx.globalAlpha=this.a;ctx.fillStyle=this.clr;ctx.shadowBlur=6;ctx.shadowColor=this.clr;
+    ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();ctx.restore()}
+}
+for(let i=0;i<110;i++)pts.push(new P());
+(function anim(t){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.upd(t);p.draw()});requestAnimationFrame(anim)})();
+
+/* ── RISING PETALS ── */
+const PETS=['🌸','🌺','🌹','🌷','🌼','✿','🍀'];
+function spawnPetal(){
+  const e=document.createElement('span');e.className='petal';
+  e.textContent=PETS[~~(Math.random()*PETS.length)];
+  e.style.left=Math.random()*100+'vw';
+  const d=(Math.random()*8+7).toFixed(1),dl=(Math.random()*5).toFixed(1);
+  e.style.animationDuration=d+'s';e.style.animationDelay=dl+'s';
+  e.style.fontSize=(Math.random()*.9+.8).toFixed(1)+'rem';
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),(parseFloat(d)+parseFloat(dl))*1000+600);
+}
+for(let i=0;i<20;i++)spawnPetal();
+setInterval(spawnPetal,1600);
+
+/* ── PHOTO EMBED ── */
+// Try to load the photo; show beautiful fallback if not found
+const pin=document.getElementById('pin');
+const img=document.createElement('img');
+img.alt='Our Wonderful Amma with Shyam & Karthik';
+img.style.cssText='width:100%;display:block;border-radius:26px;object-fit:cover';
+
+let tries=0;
+const srcs=[
+  'Gemini_Generated_Image_l51htyl51htyl51h.png',
+  './Gemini_Generated_Image_l51htyl51htyl51h.png',
+];
+
+function tryLoad(){
+  if(tries<srcs.length){img.src=srcs[tries++];}
+  else{showFallback();}
+}
+img.onerror=()=>tryLoad();
+img.onload=()=>{
+  const spk=document.createElement('div');spk.className='spark';
+  pin.appendChild(img);pin.appendChild(spk);
+};
+tryLoad();
+
+function showFallback(){
+  pin.innerHTML=`
+    <div class="fb">
+      <div class="fb-icon">🌸</div>
+      <div class="fb-txt">Our Wonderful Amma</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(255,255,255,.5);font-size:1rem;text-align:center;padding:0 16px">
+        Carrying love in every smile
+      </div>
+    </div>`;
+}
+</script>
+</body>
+</html>
